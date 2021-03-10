@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Reserva {
+public class Reserva implements Material {
     //ATRIBUTOS
     private static Scanner sc = new Scanner(System.in);
     private Libro libro;
@@ -101,7 +101,34 @@ public class Reserva {
         
             
         }
+
+    public void hacerReserva (Usuario usuario, Libro libro, String isbn){
+        System.out.println("Cuantos libros quieres reservar?");
+        int cantidad = sc.nextInt();
         
+        if ()
+    }
+    @Override
+    public LocalDate mostrarFechaDevolucion() {
+        return this.getFecha().plusMonths(1);
+    }
+
+    @Override;
+    public void mostrarInfoChula() {
+        System.out.println("INFORMACION SOBRE LA RESERVA: ");
+        System.out.println("Libro reservado: ");
+        System.out.println("\t ISBN: " + this.getLibro().getIsbn());
+        System.out.println("\t Autor: " + this.getLibro().getAutor());
+        System.out.println("\t Editorial: " + this.getLibro().getEditorial());
+        System.out.println("\t Cantidad reservada: " + this.getCantidadReservada());
+        System.out.println("Tiempo de la reserva: ");
+        System.out.println("\t Fecha: " + this.getFecha());
+        System.out.println("\t Hora: " + this.getHora());
+        System.out.println("Persona que ha reservado la reserva: ");
+        System.out.println("\t Nombre: " + this.getUsuario().getNombre());
+        System.out.println("\t Apellidos: " + this.getUsuario().getApellido1() + " " + getUsuario().getApellido2());
+        System.out.println("\t Telefono: " + this.getUsuario().getTelefono());
+        System.out.println("\t Correo electronico: " + this.getUsuario().getCorreo());
         
     }
 }
