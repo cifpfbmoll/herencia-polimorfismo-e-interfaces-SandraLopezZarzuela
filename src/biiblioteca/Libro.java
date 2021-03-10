@@ -151,7 +151,7 @@ public class Libro {
         }
     }
     
-    public static void buscarIsbn(ArrayList <Libro> listaLibros){
+    public static int buscarIsbn(ArrayList <Libro> listaLibros){
         Libro b1 = new Libro ();
         System.out.println("Introduce el isbn del libro que desea buscar");
         int isbn = sc.nextInt();
@@ -159,10 +159,12 @@ public class Libro {
         for (int i = 0;i<listaLibros.size();i++){
             if (listaLibros.get(i).getIsbn()==isbn){
                 System.out.println(i);
+                return i;
             }else{
                 System.out.println("Libro no encontrado");
             }
         }
+        return -1;
     }
     
     public static int menuModificar(){

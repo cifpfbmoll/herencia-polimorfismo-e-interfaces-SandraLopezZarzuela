@@ -20,13 +20,15 @@ public class Usuario extends Persona {
     private int codigoPostal;
     private String correo;
     
-    private ArrayList <Persona> listaPersonas = new ArrayList ();
+    private ArrayList <Reserva> listaReservas = new ArrayList();
+    
     
     private static Scanner sc = new Scanner (System.in);
 
     public Usuario() {
     }
 
+    
     public Usuario(String direccion, String telefono, int codigoPostal, String correo, String nombre, String apellido1, String apellido2, int edad) {
         super(nombre, apellido1, apellido2, edad);
         this.telefono = telefono;
@@ -45,6 +47,14 @@ public class Usuario extends Persona {
         this.setCorreo(u1.getCorreo());
         this.setDireccion(u1.getDireccion());
         this.setTelefono(u1.getTelefono());
+    }
+
+    public ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+    public void setListaReservas(ArrayList<Reserva> listaReservas) {
+        this.listaReservas = listaReservas;
     }
 
     public String getDireccion() {
@@ -79,14 +89,6 @@ public class Usuario extends Persona {
         this.correo = correo;
     }
 
-    public ArrayList<Persona> getListaPersonas() {
-        return listaPersonas;
-    }
-
-    public void setListaUsuarios(ArrayList<Persona> listaPersonas) {
-        this.listaPersonas = listaPersonas;
-    }
-
     @Override
     public String toString() {
         return super.toString()+ "Usuario{" + "telefono=" + telefono + ", codigoPostal=" + codigoPostal + ", correo=" + correo + ", listaUsuarios=" + listaUsuarios + '}';
@@ -113,7 +115,7 @@ public class Usuario extends Persona {
             listaPersonas.add(nuevou1);
         }
         
-        public static void inicioUsuario(ArrayList <Persona> listaPersonas){
+        public static int inicioUsuario(ArrayList <Persona> listaPersonas){
             
             System.out.println("Introduce tu correo");
             String correoElectronico = sc.nextLine();

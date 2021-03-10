@@ -101,13 +101,67 @@ public class Reserva implements Material {
         
             
         }
-
-    public void hacerReserva (Usuario usuario, Libro libro, String isbn){
-        System.out.println("Cuantos libros quieres reservar?");
-        int cantidad = sc.nextInt();
+    
+    public static void hacerReserva(ArrayList <Persona> listaPersonas, ArrayList <Libro> listaLibro){
         
-        if ()
-    }
+        int posicionUs = Usuario.inicioUsuario(listaPersonas);
+        //si se ha registrado correctamente
+        if (posicionUs != -1){
+            //hago el registro
+            Usuario usuario = ((Usuario)listaPersonas.get(posicionUs));
+            if (usuario.getListaReservas().size()< 10){
+                int posicionLibro = Libro.buscarIsbn(listaLibro);
+                if (posicionLibro !=-1){
+                    if (listaLibro.get(posicionLibro).getNumCopiasDisponibles()> 0){
+                        //quito un libro disponible
+                        listaLibro.get(posicionLibro).setNumCopiasDisponibles(listaLibro.get(posicionLibro).getNumCopiasDisponibles()-1);
+                        //añado a reserva el libro
+                        Reserva nueva = new Reserva(listaLibro.get(posicionLibro));
+                        //añado la reserva a la lista
+                        usuario.getListaReservas().add(nueva);
+                        System.out.println("Reserva ");
+                    
+                    
+                    }else{
+                        System.out.println("No existen copias disponibles del libro");
+                    }
+                }
+            }else{
+                System.out.println("No se pueden reservar mas de 10 libros");
+            }
+        }
+        
+    /**
+     *
+     * @param listaPersonas
+     * @param listaLibro
+     */
+    public static void devolverLibro (ArrayList <Persona> listaPersonas, ArrayList <Libro> listaLibro){
+            
+            int posicionUs = Usuario.inicioUsuario(listaPersonas);
+            
+            if (posicionUs != -1){
+                Usuario usuario = (Usuario)listaPersonas.get(posicionUs);
+                if (usuario.getListaReservas().size()>0){
+                    int encontrar = Libro.buscarIsbn(listaLibro);
+                    if (encontrar != -1){
+                        //eliminamos la reserva
+                        usuario.getListaReservas().remove(encontrar);
+                        //buscamos el libro otra vez y le añadimos una copia disponible
+                        Libro libro = listaLibro.get(Libro.buscarIsbn(listaLibro));
+                        libro.setNumCopiasDisponibles(libro.getNumCopiasDisponibles()+1);
+                        System.out.println("Se ha devuelto el libro");
+                        
+                    }
+                }else{
+                    System.out.println("No hay libros reservados");
+                }
+            }
+                    
+                    
+                    
+        }
+        
     @Override
     public LocalDate mostrarFechaDevolucion() {
         return this.getFecha().plusMonths(1);
